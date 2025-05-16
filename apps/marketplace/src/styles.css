@@ -1,0 +1,134 @@
+/* src/styles.css  */
+
+/* Import all fonts from the old project – now including all required families */
+@import 'tailwindcss';
+
+@plugin "tailwindcss-animate";
+
+/* Base variables: Colors, spacing, fonts, etc. */
+:root {
+	/* Colors */
+	--background: #141414;
+	--foreground: #ffffff;
+
+	--card: #262626;
+	--card-foreground: #d4d4d4;
+
+	--popover: #000000;
+	--popover-foreground: #ffffff;
+
+	--primary: #ffffff;
+	--primary-foreground: #000000;
+
+	--secondary: #e0e0e0;
+	--secondary-foreground: #000000;
+
+	--muted: #000000;
+	--muted-foreground: #a0a0a0;
+
+	--accent: #ff0000;
+	--accent-foreground: #000000;
+
+	--destructive: #983224;
+	--destructive-foreground: #ffffff;
+}
+
+@theme inline {
+	/* Core colors */
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+
+	/* Radius */
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Base resets and global element styles (from the old project) */
+@layer base {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	* {
+		margin: 0;
+	}
+
+	html:not(.fonts-loaded) body {
+		visibility: hidden;
+	}
+
+	body {
+		line-height: 1.5;
+		-webkit-font-smoothing: antialiased;
+		@apply bg-background text-foreground;
+	}
+
+	img,
+	picture,
+	video,
+	canvas,
+	svg {
+		display: block;
+		max-width: 100%;
+	}
+
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+	}
+
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		overflow-wrap: break-word;
+	}
+
+	p {
+		text-wrap: pretty;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		text-wrap: balance;
+	}
+
+	#root,
+	#__next {
+		isolation: isolate;
+	}
+}
