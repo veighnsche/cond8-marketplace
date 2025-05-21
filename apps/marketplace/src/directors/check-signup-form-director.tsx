@@ -1,7 +1,8 @@
 import { createDirector } from '@cond8-ai/core';
 import { Context } from 'hono';
-import { DashboardConduit } from '../conduits/dashboard-conduit';
-import signupDirector from './signup-director';
+import { DashboardActors as Actors, DashboardConduit } from '../conduits/dashboard-conduit';
+import { canonicalEmail } from '../utils/canonical-email';
+import { SignupTemplate } from './signup-director';
 
 const CheckSignupFormDirector = createDirector<DashboardConduit>('CheckSignupForm').init<Context>(c => ({
 	conduit: new DashboardConduit(c),
@@ -16,7 +17,17 @@ CheckSignupFormDirector(
 		} else if (!email.includes('@')) {
 			c8.var.string('email-error', 'Email is invalid');
 		} else {
-			c8.var.string('email', email);
+			const db = (c8.body as Context).env?.DB;
+			if (!db) {
+				c8.var.string('email-error', 'Database not found');
+			} else {
+				const result = await db.prepare('SELECT id FROM users WHERE email = ?').bind(canonicalEmail(email)).first();
+				if (result) {
+					c8.var.string('email-error', 'Email already registered');
+				} else {
+					c8.var.string('email', canonicalEmail(email));
+				}
+			}
 		}
 		return c8;
 	},
@@ -35,7 +46,12 @@ CheckSignupFormDirector(
 		return c8;
 	},
 
-	signupDirector.AsActor,
+	SignupTemplate,
+	Actors.VHX.Partialize.Set('html'),
 );
 
-export default CheckSignupFormDirector.fin<[string, string, string]>(c8 => [c8.var.string('html'), c8.var('email'), c8.var('password')]);
+export default CheckSignupFormDirector.fin<[string, string | undefined, string | undefined]>(c8 => [
+	c8.var.string('html'),
+	c8.var.optional('email'),
+	c8.var.optional('password'),
+]);

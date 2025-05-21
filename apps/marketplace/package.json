@@ -5,6 +5,7 @@
 	"scripts": {
 		"build:css": "tailwindcss -i ./src/styles.css -o public/dist/styles.css",
 		"cf-typegen": "wrangler types",
+		"db:reset": "wrangler d1 execute myapp-users --file=schema.sql",
 		"deploy": "wrangler deploy",
 		"dev": "concurrently \"wrangler dev\" \"npm run dev:css\"",
 		"dev:css": "tailwindcss -i ./src/styles.css -o ./public/dist/styles.css --watch",
@@ -20,6 +21,7 @@
 		"hono": "^4.7.7",
 		"jest-diff": "^29.7.0",
 		"lucide-preact": "^0.503.0",
+		"mimetext": "^3.0.27",
 		"miniflare": "^4.20250416.0",
 		"openai": "^4.95.0",
 		"preact": "^10.26.5",
@@ -29,6 +31,7 @@
 		"zod": "^3.24.3"
 	},
 	"devDependencies": {
+		"@types/mimetext": "^2.0.4",
 		"@types/node": "^22.14.1",
 		"autoprefixer": "^10.4.21",
 		"concurrently": "^9.1.2",
