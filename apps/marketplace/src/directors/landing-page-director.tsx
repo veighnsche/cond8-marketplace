@@ -11,7 +11,27 @@ const LandingPageDirector = createDirector<DashboardConduit>('LandingPage').init
 LandingPageDirector(
 	Actors.VHX.Title('Hello World!'),
 	Actors.VHX.Header(<DefaultHeaders />),
-	Actors.VHX.Template(<h1 className="text-3xl text-foreground">Hello World!</h1>),
+	Actors.VHX.Template(
+		<div className="flex flex-col items-center gap-4">
+			<h1 className="text-3xl text-foreground">Hello World!</h1>
+			<div className="flex gap-2">
+				<a
+					href="/login"
+					className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition text-center no-underline"
+					role="button"
+				>
+					Login
+				</a>
+				<a
+					href="/signup"
+					className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 transition text-center no-underline"
+					role="button"
+				>
+					Register
+				</a>
+			</div>
+		</div>
+	),
 	Actors.VHX.Finalize.Set('html'),
 );
 

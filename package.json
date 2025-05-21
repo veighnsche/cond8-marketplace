@@ -1,5 +1,9 @@
 {
   "name": "cond8-marketplace",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -13,8 +17,9 @@
     "turbo": "^2.5.3",
     "typescript": "5.8.2"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.7.1",
   "engines": {
     "node": ">=18"
-  }
+  },
+  "dependencies": {}
 }
