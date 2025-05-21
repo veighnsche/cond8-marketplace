@@ -33,11 +33,13 @@ app.post('/signup', async c => {
 			'Content-Type': 'text/html; charset=utf-8',
 		});
 	}
+
 	const html = await CreateUserDirector({
 		c,
 		email,
 		password,
 	});
+
 	return c.html(html, 200, {
 		'Content-Type': 'text/html; charset=utf-8',
 	});

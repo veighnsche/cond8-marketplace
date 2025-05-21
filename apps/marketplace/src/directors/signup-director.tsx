@@ -11,17 +11,11 @@ const SignupDirector = createDirector<DashboardConduit>('Signup').init<Context>(
 SignupDirector(
 	c8 => {
 		if (!c8.var.has('email')) {
-			c8.var.string('email', '');
+			c8.var.string('email', 'test@test.com');
 		}
 		if (!c8.var.has('password')) {
-			c8.var.string('password', '');
+			c8.var.string('password', 'Test1234');
 		}
-		console.log({
-			email: c8.var.string('email'),
-			emailError: c8.var.has('email-error'),
-			password: c8.var.string('password'),
-			passwordError: c8.var.has('password-error'),
-		});
 		return c8;
 	},
 	Actors.VHX.Title('Signup'),
